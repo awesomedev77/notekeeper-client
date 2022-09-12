@@ -1,16 +1,21 @@
 import React from 'react';
+import swal from 'sweetalert';
 
 const UnPinnedTask = ({ unPinTaskList, handleEdit, handleCompletebtn, handleDeletebtn }) => {
     //pin button event
     const handlePin = id => {
         console.log('pinned', id);
-        const url = `http://localhost:5000/pin/task/${id}`
+        const url = `${process.env.REACT_APP_URL}/pin/task/${id}`
         fetch(url, {
             method: "put"
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
+                if (data.modifiedCount > 0) {
+                    swal("Task Pinned!", "WoW your task is pinned successfully", "success");
+                } else {
+                    swal("Task Pinned Error!", "An error occured during the pin operation", "error");
+                }
             })
 
     }

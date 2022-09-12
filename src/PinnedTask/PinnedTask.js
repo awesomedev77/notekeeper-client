@@ -1,4 +1,5 @@
 import React from 'react';
+import swal from 'sweetalert';
 
 const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebtn }) => {
 
@@ -11,7 +12,11 @@ const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebt
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
+                if (data.modifiedCount > 0) {
+                    swal("Task Unpinned!", "Your task is unpinned successfully", "success");
+                } else {
+                    swal("Task unpinned Error!", "An error occured during the unpin operation", "error");
+                }
             })
 
     }

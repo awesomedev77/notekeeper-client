@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import PinnedTask from '../../PinnedTask/PinnedTask';
 import UnPinnedTask from '../../UnPinnedTask/UnPinnedTask';
+import swal from 'sweetalert';
 
 const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList }) => {
 
-    //unpinned task list fetch
+    //task list fetch
     useEffect(() => {
-        fetch('http://localhost:5000/task')
+
+        fetch(`${process.env.REACT_APP_URL}/task`)
             .then(resp => resp.json())
             .then(data => {
                 const pinned = []
@@ -33,24 +35,34 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
 
     //delete button event
     const handleDeletebtn = id => {
-        const process = window.confirm('Do you want tho delete this task');
-        if (process) {
-            const url = `http://localhost:5000/task/${id}`
-            fetch(url, {
-                method: "delete"
-            })
-                .then(resp => resp.json())
-                .then(data => {
-                    if (data.deletedCount > 0) {
-                        alert("Task Successfully Delete");
-                        //this section is unfinished
-                        const remainingTasks = unPinTaskList.filter(task => task._id !== id);
-                        setUnPinTaskList(remainingTasks);
-                    }
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this task details!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                const url = `http://localhost:5000/task/${id}`
+                fetch(url, {
+                    method: "delete"
                 })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
 
-            console.log('btn is clicked', id);
-        }
+                            //this section is unfinished
+                            const remainingTasks = unPinTaskList.filter(task => task._id !== id);
+                            setUnPinTaskList(remainingTasks);
+                        }
+                    })
+                swal("Your task has been deleted!", {
+                    icon: "success",
+                });
+            } else {
+                swal("Your task is safe!");
+            }
+        });
     }
 
     //edit button event

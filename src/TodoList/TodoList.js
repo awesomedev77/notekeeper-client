@@ -20,7 +20,7 @@ const TodoList = () => {
         const description = descRef.current.value;
         const newTask = { title, description, time, date, complete: false, pin: false }
 
-        fetch('http://localhost:5000/task', {
+        fetch(`${process.env.REACT_APP_URL}/task`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
