@@ -25,7 +25,7 @@ const UnPinnedTask = ({ unPinTaskList, handleEdit, handleCompletebtn, handleDele
             {
                 unPinTaskList?.map(task => <div key={task._id} className='bg-white grid grid-cols-12 gap-4 content-between p-4 mt-4 rounded-lg shadow hover:shadow-lg hover:bg-indigo-200  outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 '>
 
-                    <div onClick={handleEdit} id={task._id} className='col-span-7 md:col-span-9 lg:col-span-10'>
+                    <div onClick={() => { handleEdit(task._id) }} className='col-span-7 md:col-span-9 lg:col-span-10'>
                         <h3 className='capitalize text-2xl font-semibold mb-2 text-purple-600'>{task.title} <small className='text-sm text-gray-600 font-light'>Task Added in: {task.date} at <span className='text-black font-normal'>{task.time}</span></small></h3>
                         <p>{task.description}</p>
                     </div>

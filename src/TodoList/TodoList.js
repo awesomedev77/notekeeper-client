@@ -1,14 +1,23 @@
 import React, { useRef, useState } from 'react';
 import OpenInputBox from './OpenInputBox/OpenInputBox';
 import TaskList from './TaskList/TaskList';
+import swal from 'sweetalert';
+import UpdateTask from '../UpdateTask/UpdateTask';
 
 const TodoList = () => {
 
     const [pinTaskList, setPinTaskList] = useState([]);
     const [unPinTaskList, setUnPinTaskList] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    //initial input data
     const titleRef = useRef();
     const descRef = useRef();
+
+    //current select task data
+    const [currentTitle, setCurrentTitle] = useState([])
+    const [currentDesc, setCurrentDesc] = useState([])
 
     //capture date and time
     const today = new Date();
@@ -30,7 +39,7 @@ const TodoList = () => {
             .then(resp => resp.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('successfully added the user.')
+                    swal("New Task Added!", "Your Task is added successfully", "success");
                     e.target.reset();
                 }
             });
@@ -39,8 +48,11 @@ const TodoList = () => {
         e.preventDefault()
     }
 
-    const handleEdit = () => {
-        console.log('edit is fired');
+    const handleEdit = (id, title, desc) => {
+        console.log('edit is firedd', id, title, desc);
+        setCurrentTitle(title);
+        setCurrentDesc(desc);
+        setShowEditModal(true)
     }
 
     return (
@@ -66,9 +78,20 @@ const TodoList = () => {
                             titleRef={titleRef}
                             descRef={descRef}
                             setShowModal={setShowModal}
-                        ></OpenInputBox>
+                        />
                     </>
                 ) : null}
+
+                {showEditModal ? (
+                    <>
+                        <UpdateTask
+                            currentTitle={currentTitle}
+                            currentDesc={currentDesc}
+                            setShowEditModal={setShowEditModal}
+                        />
+                    </>
+                ) : null}
+
                 <TaskList
                     pinTaskList={pinTaskList}
                     unPinTaskList={unPinTaskList}

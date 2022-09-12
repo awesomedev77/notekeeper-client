@@ -3,7 +3,7 @@ import PinnedTask from '../../PinnedTask/PinnedTask';
 import UnPinnedTask from '../../UnPinnedTask/UnPinnedTask';
 import swal from 'sweetalert';
 
-const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList }) => {
+const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList, handleEdit }) => {
 
     //task list fetch
     useEffect(() => {
@@ -64,13 +64,6 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
             }
         });
     }
-
-    //edit button event
-    const handleEdit = () => {
-        console.log('edit is fired');
-    }
-
-
 
     return (
         <div>
