@@ -1,14 +1,32 @@
 import React from 'react';
 import { useRef } from 'react';
+import swal from 'sweetalert';
 
-const UpdateTask = ({ setShowEditModal, currentTitle, currentDesc }) => {
+const UpdateTask = ({ id, setShowEditModal, currentTitle, currentDesc, time, date }) => {
 
     //update input data
     const updateTitleRef = useRef();
     const updatedescRef = useRef();
-    console.log(currentTitle, currentDesc);
+
     const handleUpdateTask = e => {
-        console.log('updated', updateTitleRef.current.value, updatedescRef.current.value)
+        const title = updateTitleRef.current.value;
+        const description = updatedescRef.current.value;
+        const updateData = { title, description, time, date };
+
+        fetch(`${process.env.REACT_APP_URL}/task/update/${id}`, {
+            method: "put",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(updateData)
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    swal("Task Updated!", "Your Task is updated successfully", "success");
+                    e.target.reset();
+                }
+            });
 
         setShowEditModal(false);
         e.preventDefault()

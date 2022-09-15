@@ -1,19 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PinnedTask from '../../PinnedTask/PinnedTask';
 import UnPinnedTask from '../../UnPinnedTask/UnPinnedTask';
 import swal from 'sweetalert';
 
-const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList, handleEdit }) => {
+const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList, handleEdit, isDataChange, setIsDataChange }) => {
+    const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const size = 6;
 
-    //task list fetch
+    // tasklist and pagination
     useEffect(() => {
-
-        fetch(`${process.env.REACT_APP_URL}/task`)
+        setIsDataChange(isDataChange + 1);
+    }, [page])
+    useEffect(() => {
+        fetch(`http://localhost:5000/task?page=${page}&&size=${size}`)
             .then(resp => resp.json())
             .then(data => {
                 const pinned = []
                 const unpinned = []
-                for (const task of data) {
+                for (const task of data.task) {
                     if (task.pin === true) {
                         pinned.push(task)
 
@@ -21,16 +26,34 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
                         unpinned.push(task)
                     }
                 }
+                const count = data.count;
+                const pageNumber = Math.ceil(count / 6);
+                setPageCount(pageNumber);
                 setPinTaskList(pinned);
                 setUnPinTaskList(unpinned);
+                setIsDataChange(isDataChange + 1);
             });
-    }, [unPinTaskList]);
+    }, [isDataChange]);
 
     //complete button event
-    const handleCompletebtn = e => {
-        const task = document.getElementById(e);
+    const handleCompletebtn = id => {
+        const task = document.getElementById(id);
         task.classList.add('complete-text');
-        console.log(task.classList);
+        console.log('complete', id);
+        const url = `${process.env.REACT_APP_URL}/complete/task/${id}`
+        fetch(url, {
+            method: "put"
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    setIsDataChange(isDataChange + 1);
+                    console.log(data)
+                    swal("Task complete!", "Your task is complete successfully", "success");
+                } else {
+                    swal("Task complete Error!", "An error occured during the complete operation", "error");
+                }
+            })
     }
 
     //delete button event
@@ -51,9 +74,9 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
                     .then(data => {
                         if (data.deletedCount > 0) {
 
-                            //this section is unfinished
                             const remainingTasks = unPinTaskList.filter(task => task._id !== id);
                             setUnPinTaskList(remainingTasks);
+                            setIsDataChange(1);
                         }
                     })
                 swal("Your task has been deleted!", {
@@ -70,6 +93,8 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
             {/* Pinned Task List */}
             {
                 pinTaskList?.length ? <PinnedTask
+                    isDataChange={isDataChange}
+                    setIsDataChange={setIsDataChange}
                     pinTaskList={pinTaskList}
                     handleEdit={handleEdit}
                     handleCompletebtn={handleCompletebtn}
@@ -80,12 +105,25 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
             {/* unpinned task list */}
             {
                 unPinTaskList?.length ? <UnPinnedTask
+                    isDataChange={isDataChange}
+                    setIsDataChange={setIsDataChange}
                     unPinTaskList={unPinTaskList}
                     handleEdit={handleEdit}
                     handleCompletebtn={handleCompletebtn}
                     handleDeletebtn={handleDeletebtn}
                 /> : <></>
             }
+
+            {/* pagination */}
+            <div className='pagination'>
+                {
+                    [...Array(pageCount).keys()].map(number => <button
+                        className={number === page ? 'selected' : ''}
+                        key={number}
+                        onClick={() => { setPage(number) }}
+                    >{number + 1}</button>)
+                }
+            </div>
         </div>
     );
 };
