@@ -1,8 +1,10 @@
-Projects Links: Live link: https://mfnotekeeper.web.app/Client Side Code: https://github.com/Foy5al/notekeeperServer Side Code: https://github.com/Foy5al/notekeeper-server
-Technology used:
-►Frontend: React Js, Tailwind, sweet alert
-►serverside: Node Js, Express JsDatabase: MongoDBHosting: Firebase and Heroku
-►App View
+Projects Links: Live link: https://mfnotekeeper.web.app/Client </br>
+Side Code: https://github.com/Foy5al/notekeeperServer  </br>
+Side Code: https://github.com/Foy5al/notekeeper-server  </br>
+Technology used:  </br>
+►Frontend: React Js, Tailwind, sweet alert  </br>
+►serverside: Node Js, Express JsDatabase: MongoDBHosting: Firebase and Heroku  </br>
+►App View  </br>
 ![app_view](https://user-images.githubusercontent.com/77278709/190683634-2e71b142-f8cd-43bb-85f6-295d72201bb5.png)
 
 # Getting Started with Create React App
