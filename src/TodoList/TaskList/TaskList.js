@@ -14,7 +14,7 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
     }, [page]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/task?page=${page}&&size=${size}`)
+        fetch(`${process.env.REACT_APP_URL}/task?page=${page}&&size=${size}`)
             .then(resp => resp.json())
             .then(data => {
                 const pinned = []
@@ -66,7 +66,7 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                const url = `http://localhost:5000/task/${id}`
+                const url = `${process.env.REACT_APP_URL}/task/${id}`
                 fetch(url, {
                     method: "delete"
                 })

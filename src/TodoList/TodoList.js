@@ -6,11 +6,11 @@ import UpdateTask from '../UpdateTask/UpdateTask';
 import add from '../assets/add.apng';
 
 const TodoList = () => {
-    const [isDataChange, setIsDataChange] = useState(0);//it will load data from db every time data is changed
-    const [pinTaskList, setPinTaskList] = useState([]);
-    const [unPinTaskList, setUnPinTaskList] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
+    const [isDataChange, setIsDataChange] = useState(0);//it will load data from db if any data is changed
+    const [pinTaskList, setPinTaskList] = useState([]); //store pinned task
+    const [unPinTaskList, setUnPinTaskList] = useState([]); //store unpinned task
+    const [showModal, setShowModal] = useState(false); //open up the input modal
+    const [showEditModal, setShowEditModal] = useState(false); //open up edit modal
 
     //initial input data
     const titleRef = useRef();
@@ -27,6 +27,7 @@ const TodoList = () => {
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     const date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
 
+    // New task add button 
     const handleAddTask = (e) => {
         const title = titleRef.current.value;
         const tag = taglineRef.current.value;
@@ -74,7 +75,7 @@ const TodoList = () => {
                 </button>
             </div>
             <div>
-
+                {/* input modal */}
                 {showModal ? (
                     <>
                         <OpenInputBox
@@ -86,7 +87,7 @@ const TodoList = () => {
                         />
                     </>
                 ) : null}
-
+                {/* update modal */}
                 {showEditModal ? (
                     <>
                         <UpdateTask
@@ -99,7 +100,7 @@ const TodoList = () => {
                         />
                     </>
                 ) : null}
-
+                {/* task section */}
                 <TaskList
                     isDataChange={isDataChange}
                     setIsDataChange={setIsDataChange}

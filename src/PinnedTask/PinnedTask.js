@@ -59,6 +59,7 @@ const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebt
 
                     </div>
                     <hr />
+
                     {/* bottom button section   */}
                     <div className="bg-gray-100 px-6 py-1 text-right">
                         <p className="focus:outline-none text-sm leading-normal pt-2 text-gray-500">Last updated in: {task.date} at <span className='text-black font-normal'>{task.time}</span></p>

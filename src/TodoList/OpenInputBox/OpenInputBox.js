@@ -23,18 +23,19 @@ const OpenInputBox = ({ handleAddTask, titleRef, taglineRef, descRef, setShowMod
                                     className="text-2xl font-semibold px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full" />
 
                             </div>
-                            {/* tagline */}
+                            {/* Task tagline section*/}
                             <div className="p-5 border-b border-solid border-slate-200 rounded-t">
                                 <label htmlFor="task-title" className="form-label text-2xl font-semibold mb-2 text-gray-700"
                                 >Task Tagline </label>
                                 <input id="task-tagline"
+                                    required
                                     type="text"
                                     ref={taglineRef}
                                     placeholder="React_JS"
-                                    className="text-2xl font-semibold px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full" />
+                                    className="text-xl font-semibold px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full" />
 
                             </div>
-                            {/*body*/}
+                            {/*Task description section*/}
                             <div className="relative p-6 flex-auto">
                                 <label htmlFor="task-description" className="form-label text-lg font-semibold mb-2 text-gray-700"
                                 >Task Description </label>
@@ -44,14 +45,15 @@ const OpenInputBox = ({ handleAddTask, titleRef, taglineRef, descRef, setShowMod
                                     ref={descRef}
                                     className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
                                     id="task-description"
-                                    rows="3"
+                                    rows="4"
                                     placeholder="Write your task details here"
                                 ></textarea>
                             </div>
-                            {/*footer*/}
+
+                            {/*Modal button section*/}
                             <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                                 <button
-                                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className="hover:border hover:border-red-500 hover:rounded hover:shadow text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
                                     onClick={() => setShowModal(false)}
                                 >
