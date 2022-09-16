@@ -11,7 +11,8 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
     // tasklist and pagination
     useEffect(() => {
         setIsDataChange(isDataChange + 1);
-    }, [page])
+    }, [page]);
+
     useEffect(() => {
         fetch(`http://localhost:5000/task?page=${page}&&size=${size}`)
             .then(resp => resp.json())
@@ -39,7 +40,6 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
     const handleCompletebtn = id => {
         const task = document.getElementById(id);
         task.classList.add('complete-text');
-        console.log('complete', id);
         const url = `${process.env.REACT_APP_URL}/complete/task/${id}`
         fetch(url, {
             method: "put"
@@ -99,6 +99,7 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
                     handleEdit={handleEdit}
                     handleCompletebtn={handleCompletebtn}
                     handleDeletebtn={handleDeletebtn}
+                    page={page}
                 /> : <></>
             }
 
@@ -111,7 +112,8 @@ const TaskList = ({ pinTaskList, setPinTaskList, unPinTaskList, setUnPinTaskList
                     handleEdit={handleEdit}
                     handleCompletebtn={handleCompletebtn}
                     handleDeletebtn={handleDeletebtn}
-                /> : <></>
+                    page={page}
+                /> : <> <h1 style={{ marginBottom: -15 }} className='text-center my-10 text-xl lg:text-2xl text-purple-700'><span className='bg-purple-300 shadow rounded-2xl p-4'>Task Bar is Empty</span></h1></>
             }
 
             {/* pagination */}

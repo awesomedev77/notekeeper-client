@@ -4,7 +4,7 @@ import pin from '../assets/pin.png'
 import trash from '../assets/trashbin.apng'
 import complete from '../assets/complete.apng'
 
-const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebtn, isDataChange, setIsDataChange }) => {
+const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebtn, isDataChange, setIsDataChange, page }) => {
 
     //unpin button event
     const handleUnPin = id => {
@@ -27,7 +27,7 @@ const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebt
     }
     return (
         <div aria-label="group of cards" tabIndex="0" className="container mx-auto focus:outline-none py-8 w-full">
-            <h1 style={{ marginBottom: -15 }} className='text-center text-2xl text-purple-700'><span className='bg-yellow-300 shadow rounded-2xl p-4'>Pinned Task</span></h1>
+            <h1 style={{ marginBottom: -15 }} className='text-center text-xl lg:text-2xl text-purple-700'><span className='bg-yellow-300 shadow rounded-2xl p-4'>Pinned Task of page {page + 1}</span></h1>
             <div className='bg-yellow-100 rounded-2xl pt-10 pb-4 px-4  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-stretch items-center mx-auto'>
                 {pinTaskList?.map(task => <div key={task._id} style={{ borderTopRightRadius: 24 }} className="bg-white max-w-xs rounded-md overflow-hidden shadow-lg my-2 mx-auto ">
 
@@ -38,19 +38,19 @@ const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebt
                                 <p className="focus:outline-none font-semibold leading-normal text-xl leading-5 text-gray-800">{task.title}</p>
                             </div>
                             {/* pin button */}
-                            <button onClick={() => { handleUnPin(task._id) }} style={{ marginTop: -15, marginRight: -24 }} className='ml-2 bg-white hover:bg-orange-300 text-gray-800 font-semibold py-2 px-2 rounded shadow'>
-                                <img className="focus:outline-none" style={{ width: 40, height: 30 }} src={pin} alt="pin" />
+                            <button onClick={() => { handleUnPin(task._id) }} style={{ marginTop: -15, marginRight: -24 }} className='ml-2 p-1 bg-white hover:bg-purple-300 text-gray-800 font-semibold shadow'>
+                                <img className="focus:outline-none" style={{ width: 40, height: 40 }} src={pin} alt="pin" />
                             </button>
-                            {/* tagline section */}
-                            {
-                                task.tagline ? <div className="focus:outline-none flex">
-                                    <div className="py-2 px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">{task.tagline}</div>
-                                </div> : <></>
-                            }
-
                         </div>
+
                         <div onClick={() => { handleEdit(task._id, task.title, task.description) }}
                             style={{ minHeight: 200 }} className="hover:shadow-lg hover:bg-indigo-200 px-6 py-3  outline-none focus:outline-none ease-linear transition-all duration-150">
+                            {/* tagline section */}
+                            {
+                                task.tag ? <div className="focus:outline-none flex">
+                                    <div className="py-2 mb-2 px-4 text-md leading-3 text-indigo-700 rounded-full bg-indigo-100">{task.tag}</div>
+                                </div> : <></>
+                            }
 
                             <p className="text-grey-darker text-base text-justify">
                                 {task.description}
@@ -68,7 +68,7 @@ const PinnedTask = ({ pinTaskList, handleEdit, handleCompletebtn, handleDeletebt
                                 <img style={{ height: '40px' }} src={complete} alt="Complete" />
                             </button>
                         </span>
-                        <span className="rounded-full inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">
+                        <span className="rounded-full inline-block bg-grey-lighter rounded-full py-1 text-sm font-semibold text-grey-darker mr-2">
                             <button className='rounded-full' onClick={() => { handleDeletebtn(task._id) }} >
                                 <img style={{ height: '40px' }} src={trash} alt="Delete" />
                             </button>

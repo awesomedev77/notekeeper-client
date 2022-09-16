@@ -9,7 +9,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<TodoList />} />
-        <Route path="/home" element={<TodoList />} />
+        <Route path="/notes" element={<TodoList />} />
       </Routes>
     </div>
   );

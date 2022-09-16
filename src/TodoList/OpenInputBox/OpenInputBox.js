@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OpenInputBox = ({ handleAddTask, titleRef, descRef, setShowModal }) => {
+const OpenInputBox = ({ handleAddTask, titleRef, taglineRef, descRef, setShowModal }) => {
     return (
         <div>
             <div
@@ -16,9 +16,21 @@ const OpenInputBox = ({ handleAddTask, titleRef, descRef, setShowModal }) => {
                                 <label htmlFor="task-title" className="form-label text-2xl font-semibold mb-2 text-gray-700"
                                 >Task Title </label>
                                 <input id="task-title"
+                                    required
                                     type="text"
                                     ref={titleRef}
-                                    placeholder="Add your task title"
+                                    placeholder="Add a task title"
+                                    className="text-2xl font-semibold px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full" />
+
+                            </div>
+                            {/* tagline */}
+                            <div className="p-5 border-b border-solid border-slate-200 rounded-t">
+                                <label htmlFor="task-title" className="form-label text-2xl font-semibold mb-2 text-gray-700"
+                                >Task Tagline </label>
+                                <input id="task-tagline"
+                                    type="text"
+                                    ref={taglineRef}
+                                    placeholder="React_JS"
                                     className="text-2xl font-semibold px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full" />
 
                             </div>
@@ -28,6 +40,7 @@ const OpenInputBox = ({ handleAddTask, titleRef, descRef, setShowModal }) => {
                                 >Task Description </label>
 
                                 <textarea
+                                    required
                                     ref={descRef}
                                     className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
                                     id="task-description"

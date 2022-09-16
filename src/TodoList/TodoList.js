@@ -14,6 +14,7 @@ const TodoList = () => {
 
     //initial input data
     const titleRef = useRef();
+    const taglineRef = useRef();
     const descRef = useRef();
 
     //current select task data
@@ -28,8 +29,9 @@ const TodoList = () => {
 
     const handleAddTask = (e) => {
         const title = titleRef.current.value;
+        const tag = taglineRef.current.value;
         const description = descRef.current.value;
-        const newTask = { title, description, time, date, complete: false, pin: false }
+        const newTask = { title, tag, description, time, date, complete: false, pin: false }
 
         fetch(`${process.env.REACT_APP_URL}/task`, {
             method: "POST",
@@ -64,7 +66,7 @@ const TodoList = () => {
                 <h1 className='text-xl md:text-3xl h-full font-semibold p-3 my-auto'>“If you do not write the thoughts of the moments, it is lost forever.”</h1>
                 {/* task add button */}
                 <button
-                    className="text-purple-600 rounded-full font-bold uppercase text-sm px-4 py-2 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="hover:bg-purple-100 text-purple-600 rounded-full font-bold uppercase text-sm px-4 py-2 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => setShowModal(true)}
                 ><img style={{ width: 100 }} src={add} alt="+" />
@@ -79,6 +81,7 @@ const TodoList = () => {
                             handleAddTask={handleAddTask}
                             titleRef={titleRef}
                             descRef={descRef}
+                            taglineRef={taglineRef}
                             setShowModal={setShowModal}
                         />
                     </>
