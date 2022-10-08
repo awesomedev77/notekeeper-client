@@ -1,5 +1,4 @@
 Projects Links: Live link: https://mfnotekeeper.web.app/Client </br>
-Side Code: https://github.com/Foy5al/notekeeperServer  </br>
 Side Code: https://github.com/Foy5al/notekeeper-server  </br>
 Technology used:  </br>
 ►Frontend: React Js, Tailwind, sweet alert  </br>
