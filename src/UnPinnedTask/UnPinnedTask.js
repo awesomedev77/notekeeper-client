@@ -45,8 +45,8 @@ const UnPinnedTask = ({ unPinTaskList, handleEdit, handleCompletebtn, handleDele
                                 style={{ minHeight: 200 }} className="hover:shadow-lg hover:bg-indigo-200 px-6 py-3  outline-none focus:outline-none ease-linear transition-all duration-150">
                                 {/* tagline section */}
                                 {
-                                    task.tagline ? <div className="focus:outline-none flex">
-                                        <div className="py-2 px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">{task.tagline}</div>
+                                    task.tag ? <div className="focus:outline-none flex">
+                                        <div className="py-2 px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">{task.tag}</div>
                                     </div> : <></>
                                 }
 
