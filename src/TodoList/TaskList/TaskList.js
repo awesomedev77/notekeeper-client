@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PinnedTask from "../../PinnedTask/PinnedTask";
 import UnPinnedTask from "../../UnPinnedTask/UnPinnedTask";
 import swal from "sweetalert";
+import LoadingScreen from "../../LoadingScreen/LoadingScreen";
 
 const TaskList = ({
   pinTaskList,
@@ -117,7 +118,9 @@ const TaskList = ({
           page={page}
         />
       ) : (
-        <></>
+        <>
+          <LoadingScreen size={50} />
+        </>
       )}
 
       {/* unpinned task list */}
