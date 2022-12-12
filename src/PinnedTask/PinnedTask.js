@@ -87,7 +87,7 @@ const PinnedTask = ({
 
               <div
                 onClick={() => {
-                  handleEdit(task._id, task.title, task.description);
+                  handleEdit(task._id, task.tag, task.title, task.description);
                 }}
                 style={{ minHeight: 200 }}
                 className="hover:shadow-lg hover:bg-indigo-200 px-6 py-3  outline-none focus:outline-none ease-linear transition-all duration-150"
