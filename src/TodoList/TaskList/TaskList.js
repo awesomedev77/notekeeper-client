@@ -103,6 +103,9 @@ const TaskList = ({
       }
     });
   };
+  if (!pinTaskList?.length && !unPinTaskList?.length) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div>
@@ -118,9 +121,7 @@ const TaskList = ({
           page={page}
         />
       ) : (
-        <>
-          <LoadingScreen size={50} />
-        </>
+        <></>
       )}
 
       {/* unpinned task list */}

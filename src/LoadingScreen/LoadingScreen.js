@@ -1,7 +1,7 @@
 import React from "react";
 
-const LoadingScreen = ({ size }) => {
-  console.log(size);
+const LoadingScreen = () => {
+  const size = 100;
   return (
     <>
       <div class="border border-purple-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
