@@ -1,5 +1,5 @@
-Projects Links: Live link: https://mfnotekeeper.web.app/Client </br>
-Side Code: https://github.com/Foy5al/notekeeper-server  </br>
+Projects Links: Live link: https://mfnotekeeper.web.app </br>
+Side Code: https://github.com/awesomedev77/notekeeper-server  </br>
 Technology used:  </br>
 ►Frontend: React Js, Tailwind, sweet alert  </br>
 ►serverside: Node Js, Express JsDatabase: MongoDBHosting: Firebase and Heroku  </br>
